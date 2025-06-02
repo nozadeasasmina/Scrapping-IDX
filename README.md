@@ -17,7 +17,16 @@ cd Scrapping-IDX
 pip install -r requirements.txt
 ```
 
-### 3. Run main script
+### 3. Add emiten name in main.py script
+```bash
+# if only one emiten
+emiten = ["AALI"] 
+
+# if having more than one emiten
+emiten = ["AALI", "ABBA"]  
+```
+
+### 4. Run main script
 ```bash
 python main.py
 ```

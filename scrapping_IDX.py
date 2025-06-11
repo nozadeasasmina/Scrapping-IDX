@@ -1,11 +1,12 @@
 import json
+import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-def scrape_companyprofile_idx(emiten, output_file='companyprofile_idx.json'):
+def scrape_companyprofile_idx(emiten, output_file='companyprofile_idx'):
     """
     scrapping company profile from IDX using emiten code
     :param emiten (list): emiten code
@@ -52,10 +53,14 @@ def scrape_companyprofile_idx(emiten, output_file='companyprofile_idx.json'):
         finally:
             driver.quit()
 
-    with open(output_file, 'w', encoding='utf-8') as f:
+    # save to json format
+    with open(f'{output_file}.json', 'w', encoding='utf-8') as f:
         json.dump(all_data, f, ensure_ascii=False, indent=4)
 
-    print(f"Data disimpan ke '{output_file}'")
+    # save to excel format
+    df = pd.DataFrame(all_data)
+    df.to_excel(f"{output_file}.xlsx", index=False)
+    print(f"Data disimpan ke '{output_file}.json & {output_file}.xlsx'")
     return all_data
 
 
